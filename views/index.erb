@@ -1,0 +1,8 @@
+<% content_for :css do %>
+  <% if @iphone %>
+    <style type="text/css"> @media screen { <%= File.read(File.join('public', 'stylesheets', 'iphone.css')) %> } </style>
+  <% else %>
+    <%= stylesheet_bundle_link_tag(:all) %>
+  <% end %>
+<% end %>
+

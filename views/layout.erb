@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <% unless @override_css %>
+  <link rel="stylesheet" href="/stylesheets/px.css" />
+  <% end %>
+  <% yield_content :css %>
+  <title> <%= @page_title || "Scio Security" %></title>
+  <meta name="description" content="<%= @meta_description || "Google-friendly description here." %>" />
+  <meta name="author" content="Scio" />
+  <%= @meta %>
+  <link rel="alternate" type="application/rss+xml" title="Scio's tweets" href="http://twitter.com/statuses/user_timeline/95339302.rss" />
+  <link rel="shortcut icon" href="<%= @favicon || img_path('/images/favicon.png') %>" />
+  <meta name="verify-v1" content="google-sitemap-ID-here" />
+</head>
+<body <%= @onload || "" %>>
+
+<%= yield %>
+
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+      /* FIXME: use correct GA ID: */
+      _gaq.push(
+        ['_setAccount', 'UA-228926-7'],
+        ['_setDomainName', 'www.sciosecurity.com'],
+        ['_trackPageview']
+      );
+    } catch(err) {}
+  </script>
+
+</body>
+</html>
