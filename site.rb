@@ -30,22 +30,15 @@ get '/' do
   if env['REQUEST_URI'].match( /cache/ )
     'not so much'
   else
-    @page_title = 'Scio default page title' # FIXME
+    @page_title = 'jm3' # TODO
     @override_css = true
     erb 'index'.to_sym
   end
 end
 
 get '/', :agent => /iPhone/ do
-  @page_title = 'Scio default page title' # FIXME
-  @override_css = true
-  @meta = '<meta name="viewport" content="width = 320" />'
-  @iphone = true
-  erb 'index'.to_sym
-end
-
-get '/iphone/?' do
-  @page_title = 'Scio default page title' # FIXME
+  # FIXME: add this route as an OR: get '/iphone/?' do 
+  @page_title = 'jm3' # TODO
   @override_css = true
   @meta = '<meta name="viewport" content="width = 320" />'
   @iphone = true
@@ -58,7 +51,7 @@ get '/google_sitemap/?' do
 end
 
 error 404 do
-  erb :error
+  erb :error, :layout => false
 end
 
 helpers do
@@ -67,7 +60,7 @@ helpers do
   def cache_server
     rand(2) + 1
   end
-  
+
   def stylesheet_tag( path )
     return "" unless path
     path = path.match('^/stylesheets/') ? path : '/stylesheets/' + path

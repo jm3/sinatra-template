@@ -1,11 +1,11 @@
-set :application, "scio.jm3.net"
-set :repository,  "git@github.com:jm3/unnamed-mkting-site.git"
+set :application, "APPNAME"
+set :repository,  "git@github.com:jm3/APPNAME.git"
 set :scm,         :git
 set :deploy_to,   "/var/www/#{application}"
 set :port,        9210
 set :use_sudo,    false
 
-server "jm3.net", :app, :web, :db, :primary => true
+server "SERVERNAME_dot_com", :app, :web, :db, :primary => true
 
 #before "deploy:update", "git:uncommitted"
 
