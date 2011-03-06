@@ -1,4 +1,6 @@
-#  An awesome bare-bones Sinatra site all ready with HTML5, tests, and more.
+#  An awesome complete working Sinatra site template for all your projects.
+
+All ready with HTML5, tests, capistrano, and more.
 
 ## License:
 
@@ -7,7 +9,8 @@
 ## Changelog:
 
 ### Things
-* built on solid HTML5 boilerplate
-* pre-built with handy Sinatra helpers
-* awesome front-end tests to make your life easier
+* Built on trusted HTML5 boilerplate
+* Already set up with Capistrano for fast, simple deployment
+* Pre-built with handy Sinatra helpers
+* Includes awesome front-end tests in rspec to make your life easier
 
