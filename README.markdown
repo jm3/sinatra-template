@@ -1,4 +1,4 @@
-#  A Clean Sinatra template. Uses HTML5 Boilerplate
+#  An awesome bare-bones Sinatra site all ready with HTML5, tests, and more.
 
 ## License:
 
@@ -7,4 +7,7 @@
 ## Changelog:
 
 ### Things
-* stuff
+* built on solid HTML5 boilerplate
+* pre-built with handy Sinatra helpers
+* awesome front-end tests to make your life easier
+
