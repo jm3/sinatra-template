@@ -1,13 +1,15 @@
 set :application, "APPNAME"
-set :repository,  "git@github.com:jm3/APPNAME.git"
-set :scm,         :git
 set :deploy_to,   "/var/www/#{application}"
-set :port,        9210
+set :deploy_via,  :export
+set :port,        22
+set :repository,  "git@github.com:USERNAME/APPNAME.git"
+set :scm,         :git
 set :use_sudo,    false
 
 server "SERVERNAME_dot_com", :app, :web, :db, :primary => true
 
-#before "deploy:update", "git:uncommitted"
+before "deploy:update", "git:uncommitted"
+after "deploy", "deploy:cleanup"
 
 deploy.task :restart, :roles => :app do
   run "touch #{current_path}/tmp/restart.txt"
@@ -24,3 +26,11 @@ namespace :git do
   end
 end
 
+# no code is faster than no code. - old Merb saying.
+namespace :bundler do
+  desc "Running bundler, installing gems, skipping development gems"
+  task :install do
+    run("cd #{release_path} && /usr/local/rvm/gems/ruby-1.8.7-p330/bin/bundle install --without=development production")
+  end
+end
+after "deploy:update_code", "bundler:install"
