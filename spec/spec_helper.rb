@@ -13,3 +13,5 @@ end
 def app
   Sinatra::Application
 end
+
+GA_ACCOUNT_ID = "UA-228926-7"

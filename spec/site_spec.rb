@@ -13,16 +13,19 @@ describe "Sales Site" do
   end
 
   it "should have an HTML homepage" do
+  pending
     get "/"
     last_response.headers["Content-Type"].should == "text/html;charset=utf-8"
   end
 
   it "should use the HTML5 doctype" do
+  pending
     get "/"
     last_response.body.should match( %r{<!DOCTYPE html>} )
   end
 
   it "should have a favicon" do
+  pending
     get "/"
     favicon = "public/favicon.ico"
 
@@ -36,12 +39,14 @@ describe "Sales Site" do
   end
 
   it "should be measured with the correct Google Analytics account" do
+  pending
     get "/"
     last_response.body.should match( %r{google-analytics.com/ga.js} )
     last_response.body.should match( %r{UA-10596696-11} )
   end
 
   it "should return 404 for missing pages" do
+  pending
     get "/this-page-does-not-exist"
     last_response.should_not be_ok
   end
