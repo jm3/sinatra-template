@@ -1,0 +1,9 @@
+*.swo
+*.swp
+.DS_Store
+bin
+coverage
+log
+tmp
+.bundled_gems
+rerun.txt
