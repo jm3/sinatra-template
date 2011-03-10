@@ -17,9 +17,10 @@ enable(:cache_bundles)     # => false (set caching headers)
 get '/' do
   @page_title = 'Some Cool Site'
   @override_css = true
-  erb 'index'.to_sym
+  haml 'index'.to_sym
 end
 
+# TODO: clean this up:
 get '/', :agent => /iPhone/ do
   @page_title = 'Some Cool Site - iPhone version'
   @override_css = true
@@ -56,5 +57,10 @@ helpers do
     return "" unless uri
     uri = uri.match('^/images/') ? uri : '/images/' + uri
     :development ? uri : "http://cache#{cache_server}.jm3.net#{uri}"
+  end
+
+  # return backup if primary is blank /via Ryan Matsumura
+  def default(primary, secondary)
+    primary.strip.size > 0 ? primary : secondary
   end
 end
