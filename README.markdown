@@ -14,7 +14,14 @@ All ready with HTML5, sweet rspec tests, capistrano, and more.
 
 ### Things
 * Built on trusted HTML5 boilerplate
+* Working layouts with content_for support in Haml & ERB
 * Already set up with Capistrano for fast, simple deployment
 * Pre-built with handy Sinatra helpers
-* Includes awesome front-end tests in rspec to make your life easier
+* Includes six awesome front-end tests in rspec to make your life easier
+* Rspec tests to catch common pre-launch errors
+* Simple Capistrano deployment to your server
+* Fast, Google-blessed, edge-hosted jQuery
+* Javascript + CSS asset packaging for faster downloads
+* All required gems pre-bundled to avoid the gem dependency dance
 
+[jm3](http://jm3.net/) [twitter.com/jm3](http://twitter.com/jm3) [http://jm3.net](http://jm3.net/)
