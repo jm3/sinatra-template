@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + "/spec_helper"
 
-describe "Sales Site" do
+describe "Web Site" do
   include Rack::Test::Methods
 
   def app
@@ -13,19 +13,16 @@ describe "Sales Site" do
   end
 
   it "should have an HTML homepage" do
-  pending
     get "/"
     last_response.headers["Content-Type"].should == "text/html;charset=utf-8"
   end
 
   it "should use the HTML5 doctype" do
-  pending
     get "/"
-    last_response.body.should match( %r{<!DOCTYPE html>} )
+    last_response.body.should match( %r{<!DOCTYPE html>}i )
   end
 
   it "should have a favicon" do
-  pending
     get "/"
     favicon = "public/favicon.ico"
 
@@ -35,20 +32,26 @@ describe "Sales Site" do
     Regexp.last_match(1).should == "MS Windows icon resource - 1 icon"
 
     r = Nokogiri::HTML(last_response.body)
-    r.xpath("html/head/link[@rel='shortcut icon']/@href").to_s.should == "/favicon.ico"
+    r.xpath("html/head/link[@rel='shortcut icon']/@href").to_s.should match( %r{/images/favicon.png|/favicon.ico} )
   end
 
   it "should be measured with the correct Google Analytics account" do
-  pending
     get "/"
     last_response.body.should match( %r{google-analytics.com/ga.js} )
-    last_response.body.should match( %r{UA-10596696-11} )
+    last_response.body.should match( /#{GA_ACCOUNT_ID}/ )
   end
 
   it "should return 404 for missing pages" do
-  pending
     get "/this-page-does-not-exist"
     last_response.should_not be_ok
+  end
+
+  it "should have a google sitemap with at least one page in it" do
+    get "/google/sitemap.xml"
+    last_response.should be_ok
+    last_response.body.should match( %r{urlset}i )
+    r = Nokogiri::HTML(last_response.body)
+    r.xpath("//urlset/url/loc/text()").to_s.should match( %r{^http} )
   end
 
 end

@@ -9,7 +9,6 @@
     %meta{ :name => "description", :content => default((yield_content :meta_description), 
       "Some great description of this website")}
     %meta{:content => "John Manoogian III (jm3)", :name => "author"}
-    %meta{:content => "width=device-width; initial-scale=1.0; maximum-scale=1.0;", :name => "viewport"}
     %link{:href => "/images/favicon.png", :rel => "shortcut icon"}
     %link{:href => "/images/apple-touch-icon.png", :rel => "apple-touch-icon"}
     %link{:href => "http://feeds.feedburner.com/jm3", :rel => "alternate", :title => "jm3 feed", :type => "application/rss+xml"}
@@ -26,17 +25,18 @@
     #container
       %header
       #main
-        hello, world.
+        = yield
       %footer
     / end of #container
     %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"}
     :javascript
       !window.jQuery && document.write('<script src="/javascripts/jquery-1.4.2.min.js"><\/script>');
     %script{:src => "/javascripts/plugins.js"}
+    %script{:src => "/javascripts/jquery-audivid.js"}
     %script{:src => "/javascripts/script.js"}
 
     :javascript
-      var _gaq = [['_setAccount', 'UA-228926-7'], ['_trackPageview']]; 
+      var _gaq = [['_setAccount', 'UA-XXXXXX-X'], ['_trackPageview']]; 
       (function(d, t) {
       var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
       g.async = true; g.src = '//www.google-analytics.com/ga.js'; s.parentNode.insertBefore(g, s);
@@ -46,4 +46,3 @@
       %script{:src => "/javascripts/libs/dd_belatedpng.js"}
       %script
         DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images
-= "</html>"

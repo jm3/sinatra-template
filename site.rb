@@ -1,57 +1,35 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'erb'
+require 'haml'
+require 'json'
+require 'pony'
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/bundles'
-require 'erb'
-require 'config/content_for.rb'
-
-# jm3: leave this disabled until we're farther along
-# ASSET_PREFIX = :development ? '' : 'http://cache1.sciosecurity.com'
-# re-open stylesheet_bundle_link_tag to add CDN support:
-# module Sinatra
-#   module Bundles
-#     module Helpers
-#       alias :old_stylesheet_bundle_link_tag :stylesheet_bundle_link_tag 
-#       def stylesheet_bundle_link_tag(bundle, media = nil)
-#         old_stylesheet_bundle_link_tag(
-#           bundle, media = nil
-#         ).gsub( /'/, '"' ).gsub( /href="\/stylesheets/, "href=\"#{ASSET_PREFIX}/stylesheets").gsub( /\?[0-9]+/, '' )
-#       end
-#     end
-#   end
-# end
+require 'sinatra/content_for2'
 
 stylesheet_bundle(:all, 'main')
-# javascript_bundle(:all, 'zoom') # breaks zoom effect
-
 enable(:compress_bundles)  # => false (compress CSS and Javascript using packr and rainpress)
 enable(:cache_bundles)     # => false (set caching headers)
 
 get '/' do
-  if env['REQUEST_URI'].match( /cache/ )
-    'not so much'
-  else
-    @page_title = 'jm3' # TODO
-    @override_css = true
-    erb 'index'.to_sym
-  end
+  @page_title = 'Some Cool Site'
+  @override_css = true
+  erb 'index'.to_sym
 end
 
 get '/', :agent => /iPhone/ do
-  # FIXME: add this route as an OR: get '/iphone/?' do 
-  @page_title = 'jm3' # TODO
+  @page_title = 'Some Cool Site - iPhone version'
   @override_css = true
   @meta = '<meta name="viewport" content="width = 320" />'
   @iphone = true
   erb 'index'.to_sym
 end
 
-get '/google_sitemap/?' do
-  content_type 'text/xml', :charset => 'utf-8'
-  erb :google_sitemap, :layout => false
-end
-
 error 404 do
-  erb :error, :layout => false
+  haml :error, :layout => false
 end
 
 helpers do
@@ -78,15 +56,5 @@ helpers do
     return "" unless uri
     uri = uri.match('^/images/') ? uri : '/images/' + uri
     :development ? uri : "http://cache#{cache_server}.jm3.net#{uri}"
-  end
-
-  def goog_date(file)
-    # tag pages with their lastmod time from git for fairness
-    if File.exists?(file)
-      date = `git log #{file} | head -n3 | tail -n1`
-      date = Time.parse( date.gsub( /Date:\s+/, '' ).chomp).utc.strftime("%Y-%m-%dT%H:%M:%S+00:00") if date
-    else
-      date = Time.now.utc.strftime("%Y-%m-%dT%H:%M:%S+00:00")
-    end
   end
 end
