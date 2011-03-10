@@ -2,7 +2,7 @@
 
 All ready with HTML5, sweet rspec tests, capistrano, and more.
 
-![Cool features](https://img.skitch.com/20110311-fccq45nidy5rm4c8jferch136.png)
+![Cool features](https://img.skitch.com/20110311-n4371d2htgfs9pte7fr5p9djbd.png)
 
 ![passing sanity tests](https://img.skitch.com/20110311-xcts587hit4upry1hm8ybh3wgw.png)
 
