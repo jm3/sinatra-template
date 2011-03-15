@@ -2,7 +2,7 @@ set :application, "APPNAME"
 set :deploy_to,   "/var/www/#{application}"
 set :deploy_via,  :export
 set :port,        22
-set :repository,  "git@github.com:USERNAME/APPNAME.git"
+set :repository,  "git@github.com:USERNAME/#{application}.git"
 set :scm,         :git
 set :use_sudo,    false
 
